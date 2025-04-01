@@ -1,4 +1,5 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Visual Studio Code
+.vscode/
 
 # dependencies
 /node_modules
@@ -21,3 +22,40 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#dotnet
+bin/
+obj/
+*.user
+*.lock
+*.vspscc
+*.vssscc
+.vscode/
+.idea/
+.DS_Store
+
+# Build results
+[Ll]og/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Entity Framework Core Migrations
+**/Migrations/*.cs
+!**/Migrations/*Designer.cs
+**/Migrations/*.resx
+**/Migrations/*.snapshot

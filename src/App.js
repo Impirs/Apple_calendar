@@ -1,28 +1,13 @@
-import React, { useState } from "react";
-import Timetable from "./js/Timetable";
-import TaskForm from "./js/TaskForm";
-import "./styles.css";
+import React from 'react';
+import UserForm from './js/userForm.js';
 
 function App() {
-    const [tasks, setTasks] = useState({
-        Monday: [], Tuesday: [], Wednesday: [], Thursday: [], Friday: [], Saturday: [], Sunday: []
-    });
-
-    const addTask = (task, day) => {
-        setTasks({ ...tasks, [day]: [...tasks[day], task] });
-    };
-
-    return (
-        <div className="app">
-            <header className="header">
-                <h1>Weekly Timetable</h1>
-            </header>
-            <div className="container">
-                <Timetable tasks={tasks} />
-                <TaskForm addTask={addTask} />
-            </div>
-        </div>
-    );
+  return (
+    <div className="App">
+      <h1>Welcome to User Creation</h1>
+      <UserForm />
+    </div>
+  );
 }
 
 export default App;
