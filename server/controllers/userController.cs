@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UserManagementAPI.Data;
 using UserManagementAPI.Models;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace UserManagementAPI.Controllers
 {
@@ -10,53 +12,120 @@ namespace UserManagementAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(AppDbContext context, ILogger<UsersController> logger)
+        public UsersController(AppDbContext context)
         {
             _context = context;
-            _logger = logger;
         }
 
-        // POST: api/users
-        [HttpPost]
-        public async Task<ActionResult<User>> CreateUser(User user)
+        [HttpPost("create")]
+        public async Task<IActionResult> CreateUser([FromBody] User newUser)
         {
-            if (user == null)
+            if (string.IsNullOrWhiteSpace(newUser.Name) || string.IsNullOrWhiteSpace(newUser.Password))
             {
-                _logger.LogWarning("Received empty user data.");
-                return BadRequest("Invalid user data");
+                return BadRequest("Username and password are required.");
             }
 
-            _context.Users.Add(user); 
+            // Проверка на уникальность имени
+            var existingUser = await _context.users.FirstOrDefaultAsync(u => u.Name == newUser.Name);
+            if (existingUser != null)
+            {
+                return BadRequest("Profile with this username already exists.");
+            }
+
+            newUser.Password = HashPassword(newUser.Password);
+            newUser.UniqueId = GenerateUniqueId();
+
+            _context.users.Add(newUser);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation($"User {user.Name} was added.");
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+            return Ok(new { message = "Profile created", unique_id = newUser.UniqueId });
         }
 
-        // GET: api/users/{id}
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginUser([FromBody] User logUser)
         {
-            var user = await _context.Users.FindAsync(id);
+            Console.WriteLine("Login attempt: " + logUser.Name + ", " + logUser.Password);
 
-            if (user == null)
+            if (logUser == null || string.IsNullOrWhiteSpace(logUser.Name) || string.IsNullOrWhiteSpace(logUser.Password))
             {
-                _logger.LogWarning($"User with ID {id} not found.");
-                return NotFound();
+                return BadRequest("Username and password are required.");
             }
 
-            return user;
+            var user = await _context.users.FirstOrDefaultAsync(u => u.Name == logUser.Name);
+            if (user == null || user.Password != HashPassword(logUser.Password))
+            {
+                return Unauthorized("Incorrect data.");
+            }
+
+            // Успешный вход
+            return Ok(new { message = "User logged in successfully!", unique_id = user.UniqueId });
         }
 
-        // GET: api/users
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        // Выход из аккаунта
+        [HttpPost("logout")]
+        public IActionResult LogoutUser()
         {
-            var users = await _context.Users.ToListAsync();
-            _logger.LogInformation("Users fetched: " + System.Text.Json.JsonSerializer.Serialize(users));
-            return users;
+            // Удаление уникального ID из сессии
+            HttpContext.Session.Remove("UniqueId");
+
+            return Ok(new { message = "Session finished." });
+        }
+
+        // Смена имени пользователя
+        [HttpPut("update-name/{uniqueId}")]
+        public async Task<IActionResult> UpdateUserName(string uniqueId, [FromBody] string newName)
+        {
+            var user = await _context.users.FirstOrDefaultAsync(u => u.UniqueId == uniqueId);
+            if (user == null) return NotFound("Profile was not found.");
+
+            user.Name = newName;
+            await _context.SaveChangesAsync();
+
+            return Ok("Username updated.");
+        }
+
+        // Смена пароля пользователя
+        [HttpPut("update-password/{uniqueId}")]
+        public async Task<IActionResult> UpdateUserPassword(string uniqueId, [FromBody] string newPassword)
+        {
+            var user = await _context.users.FirstOrDefaultAsync(u => u.UniqueId == uniqueId);
+            if (user == null) return NotFound("Profile was not found.");
+
+            user.Password = HashPassword(newPassword);
+            await _context.SaveChangesAsync();
+
+            return Ok("Password update.");
+        }
+
+        // Хеширование пароля (SHA256)
+        private string HashPassword(string password)
+        {
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                throw new ArgumentException("Password cannot be empty.", nameof(password));
+            }
+        
+            using var sha256 = SHA256.Create();
+            var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return Convert.ToBase64String(bytes);
+        }
+
+        // Генерация уникального 6-значного ID
+        private string GenerateUniqueId()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            string uniqueId;
+
+            do
+            {
+                uniqueId = new string(Enumerable.Repeat(chars, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            while (_context.users.Any(u => u.UniqueId == uniqueId));
+
+            return uniqueId;
         }
     }
 }

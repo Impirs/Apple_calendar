@@ -1,54 +1,60 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { createUser, loginUser, logoutUser } from '../api'; 
 
-function UserForm() {
+const UserForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [isLogin, setIsLogin] = useState(false); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:5023/api/users', { name, password });
-        if (response.status === 201) {
-            setMessage('User created successfully!');
-            setName('');
-            setPassword('');
-        }
+      if (isLogin) {
+        const response = await loginUser(name, password);
+        setMessage(response.message); // Display server response message
+      } else {
+        const response = await createUser(name, password); 
+        setMessage(response.message); // Display server response message
+      }
+      setName('');
+      setPassword('');
     } catch (error) {
-        setMessage('Error creating user!');
-        console.error(error);
+      setMessage(error.response ? error.response.data : 'Error processing request!');
     }
-};
+  };
 
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+    setMessage('');
+    setName('');
+    setPassword('');
+  };
 
   return (
     <div>
-      <h2>Create User</h2>
+      <h2>{isLogin ? 'Login' : 'Register'}</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name: </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password: </label>
-          <input
-            type="text"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Create User</button>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="Enter name"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter password"
+        />
+        <button type="submit">{isLogin ? 'Login' : 'Create User'}</button>
       </form>
-      {message && <p>{message}</p>}
+      <p>{message}</p>
+      <button onClick={toggleForm}>
+        {isLogin ? 'Need an account? Register' : 'Already have an account? Login'}
+      </button>
     </div>
   );
-}
+};
 
 export default UserForm;
