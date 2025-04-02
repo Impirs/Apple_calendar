@@ -11,9 +11,16 @@
 
 ### 02.04:
 
-- [ ] {debug} Adding "Swagger" for testing API 
-- [ ] {postponed} Test login and logout functionality for user profiles
-- [ ] {postponed} Test and debug session management functionality
+- [x] {debug} Adding "Swagger" for testing API 
+- [x] {postponed} Test login and logout functionality for user profiles
+- [x] {postponed} Test and debug session management functionality
+- [x] Write interface code for header, userform, navigation and sidebar
 - [ ] Write basic code for the calendar interface
 - [ ] Create the first example of adding tasks to the calendar
 - [ ] Create the first example of adding and displaying groups, grouping tasks into groups
+
+### 03.04:
+
+- [ ] {postponed} Write basic code for the calendar interface
+- [ ] {postponed} Create the first example of adding tasks to the calendar
+- [ ] {postponed} Create the first example of adding and displaying groups, grouping tasks 

@@ -1,13 +1,129 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0px;
+  margin: 0px;
+}
+
+@font-face {
+  font-family: 'Roboto classic';
+  src: url('./assets/fonts/Roboto-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto bold';
+  src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto light';
+  src: url('./assets/fonts/Roboto-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Roboto italic";
+  src: url('./assets/fonts/Roboto-Italic.ttf') format('truetype');
+}
+
+:root {
+  --neutral-color-accent: #f43341;
+
+  --neutral-color-group-red: #FF3A2D;
+  --neutral-color-group-berry: #ff2d55;
+  --neutral-color-group-orange: #FF9500;
+  --neutral-color-group-yellow: #FFCC00;
+  --neutral-color-group-green: #4CD964;
+  --neutral-color-group-teal: #5AC8FA;
+  --neutral-color-group-blue: #007AFF;
+  --neutral-color-group-indigo: #5856D6;
+  --neutral-color-group-purple: #AF52DE;
+  --neutral-color-group-pink: #ffd3e0;
+  --neutral-color-group-gray: #8E8E93;
+}
+
+:root {
+  --theme-color-background: #1c1c1e;
+  --theme-color-backgound-hover: #38383c;
+  --theme-color-secondary: #202023;
+  --theme-color-header: #323236;
+  --theme-color-form: #323236;
+  --theme-color-form-active: #636366;
+  --theme-color-form-hover: #3d3d41;
+  --theme-color-list-active: #3c3c3e;
+  --theme-color-list-hover: #35353a;
+
+  --text-color-main: #F7F7F7;
+  --text-color-inverse: #1c1c1e;
+  --text-color-secondary: #8e8d8f;
+  --text-color-third: #323236;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0px;
+}
+
+#avocado {
+  -webkit-mask: url('./assets/icons/icons8-avocado-48.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-avocado-48.png') no-repeat center;
+  mask-size: contain;
+}
+
+#account {
+  -webkit-mask: url('./assets/icons/icons8-account-64.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-account-64.png') no-repeat center;
+  mask-size: contain;
+}
+
+#done {
+  -webkit-mask: url('./assets/icons/icons8-done-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-done-50.png') no-repeat center;
+  mask-size: contain;
+}
+
+#other {
+  -webkit-mask: url('./assets/icons/icons8-other-48.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-other-48.png') no-repeat center;
+  mask-size: contain;
+}
+
+#fullplus {
+  -webkit-mask: url('./assets/icons/icons8-plus-48.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-plus-48.png') no-repeat center;
+  mask-size: contain;
+}
+
+#emptyplus {
+  -webkit-mask: url('./assets/icons/icons8-plus-64.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-plus-64.png') no-repeat center;
+  mask-size: contain;
+}
+
+#simpleplus {
+  -webkit-mask: url('./assets/icons/icons8-simple-plus-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-simple-plus-50.png') no-repeat center;
+  mask-size: contain;
+}
+
+#back {
+  -webkit-mask: url('./assets/icons/icons8-back-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-back-50.png') no-repeat center;
+  mask-size: contain;
+}
+
+#forward {
+  -webkit-mask: url('./assets/icons/icons8-forward-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-forward-50.png') no-repeat center;
+  mask-size: contain;
 }

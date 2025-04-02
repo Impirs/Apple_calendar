@@ -1,16 +1,24 @@
 import React from 'react';
-// import 'Header.css';
+import '../css/header.css';
+import UserForm from './userForm';
 
-const Header = () => (
-    <div className="header">
-        <div className="logo">
-            <h2 style={{ color: 'red' }}>My</h2> 
-            <h2 style={{ color: 'gray' }}>calendar</h2>
+const Header = ({ showPopup }) => {
+    const handleAccountClick = () => {
+        showPopup(UserForm, { title: 'User Form' });
+    };
+
+    return (
+        <div className="header">
+            <div className="logo">
+                <div className="logo_icon" id="avocado" />
+                <h2 style={{ color: "var(--text-color-main)" }}>Cloud</h2>
+                <h2 style={{ color: "var(--neutral-color-accent)" }}>Calendar</h2>
+            </div>
+            <div className="account_btn" tabIndex="-1" onClick={handleAccountClick}>
+                <div className="account_icon" id="account" tabIndex="-1"></div>
+            </div>
         </div>
-        <div className="account_btn">
-            <img src="../../assets/image/icon.png" alt="account_icon" />
-        </div>
-    </div>
-);
+    );
+};
 
 export default Header;

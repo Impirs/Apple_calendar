@@ -1,0 +1,12 @@
+.popup-content {
+    position: absolute;
+    background: var(--theme-color-background);
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    max-width: 160px;
+    width: 100%;
+    max-height: 120px;
+    height: 100%;
+    top: 30px;
+    right: 6px;
+}

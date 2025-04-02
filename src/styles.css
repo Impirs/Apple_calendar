@@ -1,6 +1,43 @@
-.app {
-  font-family: Arial, sans-serif;
+body {
+  font-family: 'Roboto classic';
   text-align: center;
-  padding: 20px;
+  background-color: var(--theme-color-background);
 }
 
+.app-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+}
+
+.content {
+  display: flex;
+  flex-grow: 1;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  z-index: 1000;
+}

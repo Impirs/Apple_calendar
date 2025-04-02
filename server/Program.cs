@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Session;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using UserManagementAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 // Настройка сервисов
-builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "User Management API", Version = "v1" });
+});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(connectionString)
@@ -44,10 +50,21 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    // app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => 
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "User Management API v1");
+    });
+}
+
 // Использование сессий
 app.UseSession();
 
 app.UseHttpsRedirection();
+app.UseAuthorization();
 app.UseCors("AllowAll");
 app.UseStaticFiles();
 app.UseRouting();

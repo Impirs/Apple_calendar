@@ -25,13 +25,14 @@ export const loginUser = async (name, password) => {
       headers: { "Content-Type": "application/json" },
     });
     console.log(response.data);
-    localStorage.setItem('unique_id', response.data.unique_id); 
+    // localStorage.setItem('unique_id', response.data.unique_id);
+    return response.data; 
   } catch (error) {
     console.error('Error logging in:', error.response.data);
   }
 };
 
 export const logoutUser = () => {
-  localStorage.removeItem('uniqueId');
+  // localStorage.removeItem('uniqueId');
   console.log('Session finished.');
 };

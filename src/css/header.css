@@ -1,0 +1,47 @@
+.header {
+    display: flex;
+    position: sticky;
+    width: 100% - 20px;
+    height: 29px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    background-color: var(--theme-color-header);
+    border-bottom: 1px solid var(--theme-color-header);
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}.logo_icon {
+    width: 16px;
+    height: 16px;
+    background-color: var(--text-color-main);
+}.logo h2 {
+    font-family: 'Roboto bold';
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.account_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: var(--theme-color-header);
+    border-radius: 4px;
+    padding: 0px;
+    cursor: pointer;
+}.account_btn:hover {
+    background-color: var(--theme-color-form-hover);
+}
+
+.account_icon {
+    width: 16px;
+    height: 16px;
+    background-color: var(--text-color-main);
+}

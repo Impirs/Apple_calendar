@@ -45,7 +45,7 @@ namespace UserManagementAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] User logUser)
         {
-            Console.WriteLine("Login attempt: " + logUser.Name + ", " + logUser.Password);
+            // Console.WriteLine("Login attempt: " + logUser.Name + ", " + logUser.Password);
 
             if (logUser == null || string.IsNullOrWhiteSpace(logUser.Name) || string.IsNullOrWhiteSpace(logUser.Password))
             {
@@ -58,11 +58,9 @@ namespace UserManagementAPI.Controllers
                 return Unauthorized("Incorrect data.");
             }
 
-            // Успешный вход
-            return Ok(new { message = "User logged in successfully!", unique_id = user.UniqueId });
+            return Ok(new { message = "User logged in successfully!", name = user.Name , unique_id = user.UniqueId });
         }
 
-        // Выход из аккаунта
         [HttpPost("logout")]
         public IActionResult LogoutUser()
         {

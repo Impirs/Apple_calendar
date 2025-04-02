@@ -1,0 +1,117 @@
+.navbar {
+    display: flex;
+    height: 28px;
+    padding-inline: 10px;
+    margin-block-end: 22px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.calendar_view {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.calendar_view span{
+    font-size: 14px;
+}
+.calendar_month {
+    font-family: 'Roboto Bold';
+    color: var(--text-color-main);
+}
+.calendar_year {
+    font-family: 'Roboto light';
+    color: var(--text-color-secondary);
+}
+
+
+.view_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 226px;
+    height: 14px;
+    background-color: var(--theme-color-form);
+    border-radius: 6px;
+    padding: 2px;
+}
+.view_buttons button {
+    font-family: 'Roboto light';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    height: 14px;
+    background-color: var(--theme-color-form);
+    border: none;
+    border-radius: 4px;
+    padding: 0px;
+    color: var(--text-color-main);
+    font-size: 10px;
+    cursor: pointer;
+}
+.view_buttons button.active {
+    background-color: var(--theme-color-form-active);
+    font-family: "Roboto classic";
+}
+
+.ctlr_buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.ctrl_btn_move {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color-background);
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.ctrl_btn_move:hover {
+    background-color: var(--theme-color-form);
+}
+.move_icon {
+    width: 10px;
+    height: 10px;
+    background-color: var(--neutral-color-accent);
+}
+
+.ctrl_btn_today {
+    font-family: "Roboto light";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--neutral-color-accent);
+    font-size: 10px;
+    width: 48px;
+    height: 20px;
+    background-color: var(--theme-color-background);
+    border-radius: 6px;
+    cursor: pointer;
+}
+.ctrl_btn_today:hover {
+    background-color: var(--theme-color-form);
+}
+
+.ctrl_btn_add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color-background);
+    width: 20px;
+    height: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.ctrl_btn_add:hover {
+    background-color: var(--theme-color-form);
+}
+.plus_icon {
+    width: 14px;
+    height: 14px;
+    background-color: var(--neutral-color-accent);
+}
