@@ -14,8 +14,10 @@ const Header = ({ showPopup }) => {
                 <h2 style={{ color: "var(--text-color-main)" }}>Cloud</h2>
                 <h2 style={{ color: "var(--neutral-color-accent)" }}>Calendar</h2>
             </div>
-            <div className="account_btn" tabIndex="-1" onClick={handleAccountClick}>
-                <div className="account_icon" id="account" tabIndex="-1"></div>
+            <div className="account_btn"
+                onClick={handleAccountClick}
+                onMouseDown={(e) => e.preventDefault()}>
+                <div className="account_icon" id="account"></div>
             </div>
         </div>
     );

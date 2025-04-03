@@ -5,7 +5,7 @@ body {
 
 @font-face {
   font-family: 'Roboto classic';
-  src: url('./assets/fonts/Roboto-Black.ttf') format('truetype');
+  src: url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -79,6 +79,13 @@ h1, h2, h3, h4, h5, h6 {
   mask-size: contain;
 }
 
+#settings {
+  -webkit-mask: url('./assets/icons/icons8-settings-48.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-settings-48.png') no-repeat center;
+  mask-size: contain;
+}
+
 #done {
   -webkit-mask: url('./assets/icons/icons8-done-50.png') no-repeat center;
   -webkit-mask-size: contain;
@@ -125,5 +132,19 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-mask: url('./assets/icons/icons8-forward-50.png') no-repeat center;
   -webkit-mask-size: contain;
   mask: url('./assets/icons/icons8-forward-50.png') no-repeat center;
+  mask-size: contain;
+}
+
+#login {
+  -webkit-mask: url('./assets/icons/icons8-login-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-login-50.png') no-repeat center;
+  mask-size: contain;
+}
+
+#cancel {
+  -webkit-mask: url('./assets/icons/icons8-cancel-50.png') no-repeat center;
+  -webkit-mask-size: contain;
+  mask: url('./assets/icons/icons8-cancel-50.png') no-repeat center;
   mask-size: contain;
 }

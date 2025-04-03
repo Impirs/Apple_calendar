@@ -10,3 +10,166 @@
     top: 30px;
     right: 6px;
 }
+
+.userform-content {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.userform-content form{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userform_header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: start;
+    padding: 4px 12px;
+    height: 38px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-color: var(--theme-color-header);
+    font-family: "Roboto light";
+    color: var(--text-color-main);
+    margin-bottom: 3px;
+    gap: 1px;
+}
+.userform_header h3 {
+    font-family: "Roboto classic";
+    font-size: 12px;
+    margin: 0;
+}
+.userform_header p{
+    font-family: "Roboto classic";
+    font-size: 12px;
+    margin: 0;
+    color: var(--text-color-secondary);
+}
+
+.input_row {
+    display: flex;
+    width: 140px;
+    height: 16px;
+    background-color: var(--text-color-main);
+    border-radius: 4px;
+    align-items: center;
+    margin-top: 3px;
+    padding: 0 1px;
+}
+  
+.input_row input {
+    outline: none;
+    width: 105px;
+    height: 12px;
+    flex: 1;
+    padding: 1px;
+    font-size: 11px;
+    border: 1px solid var(--text-color-main);
+    border-radius: 4px;
+    margin-right: 1px;
+}
+  
+.input_row button {
+    padding: 1px 2px;
+    font-size: 10px;
+    background-color: var(--text-color-main);
+    border: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    cursor: pointer;
+}
+  
+.input_row button:hover {
+    background-color: var(--neutral-color-group-blue);
+}
+
+.submit_icon {
+    display: flex;
+    justify-content: center;
+    background-color: var(--neutral-color-group-teal);
+    width: 12px;
+    height: 12px;
+}
+
+.footer_button {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    font-family: "Roboto light";
+    font-size: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 12px;
+    color: var(--neutral-color-accent);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.account_info_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.account_info_buttons hr {
+    width: 145px;
+    border: none;
+    border-top: 1px solid var(--theme-color-form);
+    margin: 1px;
+}
+
+.account_info_buttons button {
+    font-family: "Roboto classic";
+    font-size: 10px;
+    display: flex;
+    width: 152px;
+    height: 20px;
+    border-radius: 6px;
+    align-items: center;
+    margin: 1px 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.account_info_buttons button:hover {
+    background-color: var(--theme-color-form-hover);
+}
+
+.settings_button {
+    color: var(--text-color-main)
+}
+.account_button {
+    color: var(--neutral-color-group-blue);
+}
+.logout_button {
+    color: var(--neutral-color-accent);
+}
+
+.settings_info_icon, .account_info_icon, .logout_info_icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12px;
+    height: 12px;
+    margin-right: 4px;
+}
+.settings_info_icon {
+    background-color: var(--neutral-color-group-blue);
+}
+.account_info_icon {
+    background-color: var(--neutral-color-group-blue);
+}
+.logout_info_icon {
+    background-color: var(--neutral-color-accent);
+}

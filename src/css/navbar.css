@@ -1,8 +1,8 @@
 .navbar {
     display: flex;
     height: 28px;
-    padding-inline: 10px;
-    margin-block-end: 22px;
+    padding: 0 10px 0 20px;
+    margin-block-end: 12px;
     align-items: center;
     justify-content: space-between;
 }
@@ -10,17 +10,18 @@
 .calendar_view {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    width: 80px;
+    gap: 3px;
 }
 .calendar_view span{
     font-size: 14px;
 }
 .calendar_month {
-    font-family: 'Roboto Bold';
+    font-family: 'Roboto bold';
     color: var(--text-color-main);
 }
 .calendar_year {
-    font-family: 'Roboto light';
+    font-family: 'Roboto classic';
     color: var(--text-color-secondary);
 }
 
@@ -36,8 +37,10 @@
     padding: 2px;
 }
 .view_buttons button {
+    flex: 1;
     font-family: 'Roboto light';
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     width: 110px;
@@ -53,6 +56,15 @@
 .view_buttons button.active {
     background-color: var(--theme-color-form-active);
     font-family: "Roboto classic";
+}
+button:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 2px;
+    bottom: 2px;
+    width: 0.5px;
+    background-color: var(--theme-color-form-hover);
 }
 
 .ctlr_buttons {
@@ -81,16 +93,17 @@
 }
 
 .ctrl_btn_today {
-    font-family: "Roboto light";
+    font-family: "Roboto classic";
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--neutral-color-accent);
-    font-size: 10px;
+    font-size: 11px;
     width: 48px;
     height: 20px;
     background-color: var(--theme-color-background);
     border-radius: 6px;
+    padding-bottom: 1px;
     cursor: pointer;
 }
 .ctrl_btn_today:hover {

@@ -4,11 +4,11 @@ import '../css/userform.css';
 
 const UserForm = ({ onClose }) => {
   const [name, setName] = useState('');
-  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  // const [message, setMessage] = useState('');
+  const [id, setId] = useState('');
   const [isLogin, setIsLogin] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showPasswordField, setShowPasswordField] = useState(false); // Управление видимостью поля пароля
 
   useEffect(() => {
     const storedId = localStorage.getItem('userId');
@@ -20,6 +20,13 @@ const UserForm = ({ onClose }) => {
     }
   }, []);
 
+  const handleNextStep = (e) => {
+    e.preventDefault();
+    if (name.trim()) {
+      setShowPasswordField(true); // Показываем поле для пароля
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -29,75 +36,99 @@ const UserForm = ({ onClose }) => {
       } else {
         response = await createUser(name, password);
       }
-      // setMessage(response.message);
-      setName(response?.name || '');
       setId(response?.unique_id || '');
-      setPassword('');
       setIsLoggedIn(true);
 
+      // Сохраняем данные пользователя в localStorage
       localStorage.setItem('userId', response?.unique_id || '');
-      localStorage.setItem('userName', response?.name || '');
+      localStorage.setItem('userName', name);
+
+      if (onClose) onClose(); // Закрываем окно после успешного входа
     } catch (error) {
-      // setMessage(error.response?.data || 'Error processing request!');
+      console.error('Error:', error);
     }
   };
 
   const handleLogout = async () => {
     try {
       await logoutUser();
-      // setMessage('Successfully logged out!');
       setIsLoggedIn(false);
 
+      // Удаляем данные пользователя из localStorage
       localStorage.removeItem('userId');
       localStorage.removeItem('userName');
 
-      if (onClose) onClose(); 
+      if (onClose) onClose();
     } catch (error) {
-      // setMessage('Error logging out!');
+      console.error('Error:', error);
     }
   };
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-    // setMessage('');
-    setName('');
-    setPassword('');
-  };
-
   return (
-    <div className='userform-content'>
+    <div className="userform-content">
       {isLoggedIn ? (
-        <div className='account_info_container'>
-          <div className='account_info_header'> 
-            <div className='account_icon' id="account" tabIndex="-1"/>
-            <div className='account_info'>
-              <h3>{name}</h3>
-              <p>{id}</p>
-            </div>
+        <div className="account_info_container">
+          <div className="userform_header"
+                onMouseDown={(e) => e.preventDefault()}>
+            <h3>{name}</h3>
+            <p>{id}</p>
           </div>
-          <button onClick={handleLogout}>Logout</button>
+          <div className='account_info_buttons'>
+            <button className="settings_button"
+                    onMouseDown={(e) => e.preventDefault()}>
+              <div className="settings_info_icon" id="settings"/>
+              Cloud Settings
+            </button>
+            <button className="account_button"
+                    onMouseDown={(e) => e.preventDefault()}>
+              <div className="account_info_icon" id="account"/>
+              Manage Project Account
+            </button>
+            <hr />
+            <button className="logout_button" 
+                    onMouseDown={(e) => e.preventDefault()}
+                    onClick={handleLogout}>
+              <div className="logout_info_icon" id="cancel"/>
+              Sing out
+            </button>
+          </div>
         </div>
       ) : (
-        <div className='Login_form_container'>
-          <h2>{isLogin ? 'Login' : 'Register'}</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter name"
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-            />
-            <button type="submit">{isLogin ? 'Login' : 'Create User'}</button>
+        <div className="login_form_container">
+          <div className="userform_header">
+            {isLogin  ? 'Please log in to your account' 
+                      : 'Please create an account'}
+          </div>
+          <form onSubmit={showPasswordField ? handleSubmit : handleNextStep}>
+            <div className="input_row">
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter username"
+                autoFocus
+              />
+              <button type="submit">
+                <div className="submit_icon" id="login" />
+              </button>
+            </div>
+            {showPasswordField && (
+              <div className="input_row">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  autoFocus
+                />
+                <button type="submit">
+                  <div className="submit_icon" id="login" />
+                </button>
+              </div>
+            )}
           </form>
-
-          <button className='footer_button' onClick={toggleForm}>
-            {isLogin ? 'Need an account? Register' : 'Already have an account? Login'}
+          <button className="footer_button" onClick={() => setIsLogin(!isLogin)}>
+            {isLogin ? 'Need an account?' : 'Already have an account?'}
           </button>
         </div>
       )}

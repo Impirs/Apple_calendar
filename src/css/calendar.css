@@ -1,0 +1,119 @@
+.c-screen {
+    display: flex;
+    position: relative;
+    height: calc(100% - 40px);
+    margin: 0 10px 0 10px;
+    width: calc(100% - 20px);
+}
+
+/* --- Месячный календарь --- */
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: start;
+    font-family: "Roboto classic";
+    gap: 1px;
+}
+
+.calendar-table th {
+    background-color: var(--theme-color-background);
+    border: none;
+    color: var(--text-color-secondary);
+    height: 30px;
+    width: calc(100% / 7);
+    padding: 0; 
+}
+
+.calendar-table tr {
+    height: calc(100% - 36px / 6);
+}
+
+.calendar-table td {
+    border-top: 1px solid var(--theme-color-form);
+    border-right: 2px solid var(--theme-color-background);
+    border-left: 2px solid var(--theme-color-background);
+    border-bottom: none;
+
+    position: relative;
+    color: var(--text-color-main);
+    padding: 0; 
+    cursor: pointer;
+}
+
+.calendar-table .current-month-day {
+    background-color: transparent;
+}
+
+.calendar-table .prev-month-day, .calendar-table .next-month-day {
+    background-color: transparent;
+    color: var(--text-color-secondary); 
+}
+
+.calendar-table .today {
+    color: var(--neutral-color-accent);
+    font-weight: bold;
+}
+
+.index-container {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    font-family: "Roboto light";
+    font-size: 9px;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-table .today .index-container {
+    background-color: var(--neutral-color-accent);
+    border-radius: 50%;
+    color: var(--text-color-inverse);
+}
+
+.calendar-table .weekend {
+    background-color: var(--theme-color-secondary);
+    color: #fff;
+}
+
+/* --- Недельный календарь --- */
+.calendar-week-view {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.calendar-week-view .day-column {
+    flex: 1;
+    border: 1px solid #ddd;
+    background-color: transparent;
+}
+
+.calendar-week-view .weekend-column {
+    background-color: var(--theme-color-secondary);
+    color: #fff;
+}
+
+/* --- Дневной календарь --- */
+.calendar-day-view {
+    font-family: Arial, sans-serif;
+}
+
+.day-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.day-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.hour-block {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    height: 40px;
+}
