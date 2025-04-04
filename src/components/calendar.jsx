@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import '../css/calendar.css';
+import '../css/month_calendar.css';
+import '../css/week_calendar.css';
+import '../css/day_calendar.css';
 import { draw } from "../js/calendar";
 
 const CalendarGrid = ({ view = 'month', selectedDate }) => {
@@ -15,8 +17,7 @@ const CalendarGrid = ({ view = 'month', selectedDate }) => {
       date: selectedDate.date,
       month: selectedDate.month,
       year: selectedDate.year,
-      highlighttoday: true,
-      prevnextbutton: "show",
+      startWeekOnSunday: false,
     });
   }, [view, selectedDate]);
 

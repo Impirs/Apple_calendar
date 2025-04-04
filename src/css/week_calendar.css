@@ -1,0 +1,14 @@
+.calendar-week-view {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.calendar-week-view .day-column {
+    flex: 1;
+    background-color: transparent;
+}
+
+.calendar-week-view .weekend-column {
+    background-color: var(--theme-color-secondary);
+}
