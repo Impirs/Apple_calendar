@@ -1,9 +1,8 @@
 .c-screen {
     display: flex;
     position: relative;
-    height: calc(100% - 50px);
-    margin: 0 10px 10px 10px;
-    width: calc(100% - 20px);
+    height: calc(100% - 40px);
+    width: 100%;
 }
 
 .calendar-table {
@@ -11,6 +10,7 @@
     border-collapse: collapse;
     text-align: start;
     font-family: "Roboto classic";
+    margin: 0 10px 10px 10px;
     gap: 1px;
 }
 

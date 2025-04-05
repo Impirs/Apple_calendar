@@ -190,24 +190,31 @@ function createDayView(data) {
     header.appendChild(isolatedBox);
     body.appendChild(header);
 
-    const heightContainer = document.createElement("div");
-    heightContainer.className = "height-container";
-
     const eventsContainer = document.createElement("div");
     eventsContainer.className = "events-container";
     const eventsHeader = document.createElement("div");
     eventsHeader.className = "events-header";
-    const allDayLine = document.createElement("div");
+    const allDayLine = document.createElement("span");
     allDayLine.className = "all-day-line";
     allDayLine.innerHTML = "All Day";
+
+    const allDayEventsContainer = document.createElement("div");
+    allDayEventsContainer.className = "all-day-events-container";
     const allDayEvents = document.createElement("div");
     allDayEvents.className = "all-day-events";
+
     eventsHeader.appendChild(allDayLine);
-    eventsHeader.appendChild(allDayEvents);
+    allDayEventsContainer.appendChild(allDayEvents);
+    eventsHeader.appendChild(allDayEventsContainer);
     eventsContainer.appendChild(eventsHeader);
     
     const scrollContainer = document.createElement("div");
     scrollContainer.className = "scroll-container";
+    const theScroll = document.createElement("div");
+    theScroll.className = "the-scroll"; //  flex 
+
+    const dayTimeContainer = document.createElement("div");
+    dayTimeContainer.className = "day-time-container";
     const dayTimelineChart = document.createElement("div"); // grid
     // grid-template-columns: 90px repeat(1, calc(100% - 90px));
     // grid-template-rows: repeat(1440, 1fr);
@@ -216,12 +223,24 @@ function createDayView(data) {
     for (let hour = 0; hour < 24; hour++) {
         const hourBlock = document.createElement("div");
         hourBlock.className = "hour-block";
+
         const hourLabel = document.createElement("span");
         hourLabel.className = "hour-label";
-        hourLabel.innerHTML = hour < 10 ? `0${hour}` : hour;
+        if (hour === 0) {
+            hourLabel.innerHTML = " ";
+        }
+        else {
+            hourLabel.innerHTML = hour < 10 ? `0${hour}` : hour;
+        }
+        const rowStart = (60 * hour) + 1;
+        const rowEnd = (60 * hour) + 2;
+
+        hourBlock.style.gridArea = `${rowStart} / 1 / ${rowEnd} / 2`;
+
         hourBlock.appendChild(hourLabel);
         dayTimelineChart.appendChild(hourBlock);
     }
+    dayTimeContainer.appendChild(dayTimelineChart);
 
     const dayEventChart = document.createElement("div");
     dayEventChart.className = "day-event-chart";
@@ -286,13 +305,12 @@ function createDayView(data) {
     // nowTimeline.style.top = `${nowTimelineTop}%`;
 
 
-    scrollContainer.appendChild(dayTimelineChart); 
-    scrollContainer.appendChild(dayEventChart);
-    scrollContainer.appendChild(nowTimeline); // TODO add nowTimelineTop to the top of the element
-
+    theScroll.appendChild(dayTimeContainer); 
+    theScroll.appendChild(dayEventChart);
+    theScroll.appendChild(nowTimeline); // TODO add nowTimelineTop to the top of the element
+    scrollContainer.appendChild(theScroll);
     eventsContainer.appendChild(scrollContainer);
-    heightContainer.appendChild(eventsContainer);
-    body.appendChild(heightContainer);
+    body.appendChild(eventsContainer);
 
     // right side info container
     const infoContainer = document.createElement("div");
@@ -315,7 +333,9 @@ function createDayView(data) {
     infoContainer.appendChild(monthContainer);
     infoContainer.appendChild(devider);
     infoContainer.appendChild(eventInfo);
+
     container.appendChild(body);
+    container.appendChild(infoContainer);
 
     return container;
 }

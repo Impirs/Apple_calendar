@@ -49,6 +49,9 @@ body {
   --theme-color-form-hover: #3d3d41;
   --theme-color-list-active: #3c3c3e;
   --theme-color-list-hover: #35353a;
+  --theme-color-track: #323236;
+  --theme-color-thumb: #8e8d8f;
+  --theme-color-thumb-hover: #d1d1d1;
 
   --text-color-main: #F7F7F7;
   --text-color-inverse: #1c1c1e;

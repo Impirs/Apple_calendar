@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import '../css/month_calendar.css';
-import '../css/week_calendar.css';
-import '../css/day_calendar.css';
+import '../css/calendar_month.css';
+import '../css/calendar_week.css';
+import '../css/calendar_day.css';
 import { draw } from "../js/calendar";
 
 const CalendarGrid = ({ view = 'month', selectedDate }) => {

@@ -5,7 +5,7 @@ import CalendarGrid from './calendar';
 
 const NavBar = () => {
   const { selectedDate, setSelectedDate } = useCalendar();
-  const [view, setView] = useState('month');
+  const [view, setView] = useState('day');
 
   const handleViewChange = (newView) => setView(newView);
 
