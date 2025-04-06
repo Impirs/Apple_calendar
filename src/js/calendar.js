@@ -1,5 +1,9 @@
+import { createMonthTable } from "./calendarMonth.js";
+import { createWeekTable } from "./calendarWeek.js";
+import { createDayView } from "./calendarDay.js";
+
 // Constants
-const monthName = {
+export const monthName = {
     full: [
         "January",
         "February",
@@ -30,7 +34,7 @@ const monthName = {
     ],
 };
 //name of the days
-const dayName = {
+export const dayName = {
     full: [
         "Monday",
         "Tuesday",
@@ -45,300 +49,6 @@ const dayName = {
     ddd: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     sss: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 };
-
-// Create month table
-function createMonthTable(data, startWeekOnSunday) {
-    const table = document.createElement("table");
-    table.className = "calendar-table";
-
-    const headerRow = document.createElement("tr");
-    const dayNames = startWeekOnSunday ? dayName.sss : dayName.ddd;
-    dayNames.forEach((day, index) => {
-        const th = document.createElement("th");
-        const dayWeekName = document.createElement("span");
-        dayWeekName.innerHTML = day;
-        
-        const adjustedIndex = index + (startWeekOnSunday ? 0 : 1);
-        if (adjustedIndex === data.today.dayOfWeek) {
-            th.classList.add("today");
-        }
-
-        th.appendChild(dayWeekName);
-        headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
-
-    // Dates
-    let tr = document.createElement("tr");
-    let dayIndex = data.firstDayIndex;
-
-    // Fill previous month's days
-    const prevMonthDays = new Date(data.year, data.month, 0).getDate();
-    for (let i = 0; i < dayIndex; i++) {
-        const td = document.createElement("td");
-        td.className = "prev-month-day";
-
-        const indexContainer = document.createElement("span");
-        indexContainer.className = "index-container";
-        indexContainer.innerHTML = prevMonthDays - dayIndex + i + 1;
-
-        td.appendChild(indexContainer);
-        tr.appendChild(td);
-    }
-
-    // Fill current month's days
-    for (let day = 1; day <= data.totaldays; day++) {
-        if (dayIndex === 7) {
-            table.appendChild(tr);
-            tr = document.createElement("tr");
-            dayIndex = 0;
-        }
-        const td = document.createElement("td");
-        td.className = "current-month-day";
-
-        if (day === data.today.date && data.month === data.today.monthIndex && data.year === data.today.year) {
-            td.classList.add("today");
-        }
-
-        // Add weekend class
-        const adjustedIndex = startWeekOnSunday ? dayIndex : (dayIndex + 1) % 7;
-        if (adjustedIndex === 0 || adjustedIndex === 6) {
-            td.classList.add("weekend");
-        }
-
-        const indexContainer = document.createElement("span");
-        indexContainer.className = "index-container";
-        indexContainer.innerHTML = day;
-
-        td.appendChild(indexContainer);
-        tr.appendChild(td);
-        dayIndex++;
-    }
-
-    // Fill next month's days
-    for (let i = dayIndex; i < 7; i++) {
-        const td = document.createElement("td");
-        td.className = "next-month-day";
-
-        const adjustedIndex = ((i + 1) % 7);
-        if (adjustedIndex === 0 || adjustedIndex === 6) {
-            td.classList.add("weekend");
-        }
-
-        const indexContainer = document.createElement("span");
-        indexContainer.className = "index-container";
-        indexContainer.innerHTML = i - dayIndex + 1;
-
-        td.appendChild(indexContainer);
-        tr.appendChild(td);
-    }
-    table.appendChild(tr);
-
-    return table;
-}
-
-// Create week table
-function createWeekTable(data) {
-    const table = document.createElement("table");
-    table.className = "calendar-table";
-
-    // Header row for day names
-    const headerRow = document.createElement("tr");
-    dayName.ddd.forEach(day => {
-        const th = document.createElement("th");
-        th.innerHTML = day;
-        headerRow.appendChild(th);
-    });
-    table.appendChild(headerRow);
-
-    // Week row
-    const tr = document.createElement("tr");
-    for (let i = 0; i < 7; i++) {
-        const td = document.createElement("td");
-        const date = new Date(data.year, data.month, data.date + i - data.dayOfWeek);
-        td.innerHTML = date.getDate();
-        td.className = "current-week-day";
-        if (date.toDateString() === new Date().toDateString()) {
-            td.classList.add("today");
-        }
-        tr.appendChild(td);
-    }
-    table.appendChild(tr);
-
-    return table;
-}
-
-// Create day view
-function createDayView(data) {
-    const container = document.createElement("div");
-    container.className = "calendar-day-view";
-    const body = document.createElement("div");
-    body.className = "day-body";
-
-    const header = document.createElement("div");
-    header.className = "day-header";
-    const isolatedBox = document.createElement("div");
-    isolatedBox.className = "isolated-box";
-    const dateNumber = document.createElement("span");
-    dateNumber.className = "date-date";
-    dateNumber.innerHTML = data.date <10 ? `0${data.date}` : data.date;
-    const dayNameElement = document.createElement("span");
-    dayNameElement.className = "day-day";
-    dayNameElement.innerHTML = dayName.full[data.dayOfWeek];
-    isolatedBox.appendChild(dateNumber);
-    isolatedBox.appendChild(dayNameElement);
-    header.appendChild(isolatedBox);
-    body.appendChild(header);
-
-    const eventsContainer = document.createElement("div");
-    eventsContainer.className = "events-container";
-    const eventsHeader = document.createElement("div");
-    eventsHeader.className = "events-header";
-    const allDayLine = document.createElement("span");
-    allDayLine.className = "all-day-line";
-    allDayLine.innerHTML = "All Day";
-
-    const allDayEventsContainer = document.createElement("div");
-    allDayEventsContainer.className = "all-day-events-container";
-    const allDayEvents = document.createElement("div");
-    allDayEvents.className = "all-day-events";
-
-    eventsHeader.appendChild(allDayLine);
-    allDayEventsContainer.appendChild(allDayEvents);
-    eventsHeader.appendChild(allDayEventsContainer);
-    eventsContainer.appendChild(eventsHeader);
-    
-    const scrollContainer = document.createElement("div");
-    scrollContainer.className = "scroll-container";
-    const theScroll = document.createElement("div");
-    theScroll.className = "the-scroll"; //  flex 
-
-    const dayTimeContainer = document.createElement("div");
-    dayTimeContainer.className = "day-time-container";
-    const dayTimelineChart = document.createElement("div"); // grid
-    // grid-template-columns: 90px repeat(1, calc(100% - 90px));
-    // grid-template-rows: repeat(1440, 1fr);
-    dayTimelineChart.className = "day-timeline-chart";
-    // timeline-chart fill
-    for (let hour = 0; hour < 24; hour++) {
-        const hourBlock = document.createElement("div");
-        hourBlock.className = "hour-block";
-
-        const hourLabel = document.createElement("span");
-        hourLabel.className = "hour-label";
-        if (hour === 0) {
-            hourLabel.innerHTML = " ";
-        }
-        else {
-            hourLabel.innerHTML = hour < 10 ? `0${hour}` : hour;
-        }
-        const rowStart = (60 * hour) + 1;
-        const rowEnd = (60 * hour) + 2;
-
-        hourBlock.style.gridArea = `${rowStart} / 1 / ${rowEnd} / 2`;
-
-        hourBlock.appendChild(hourLabel);
-        dayTimelineChart.appendChild(hourBlock);
-    }
-    dayTimeContainer.appendChild(dayTimelineChart);
-
-    const dayEventChart = document.createElement("div");
-    dayEventChart.className = "day-event-chart";
-    const eventChartBackground = document.createElement("div");
-    eventChartBackground.className = "event-chart-background";
-    // event-chart background fill
-    // originaly it has one more biv as background / trying without it
-    for (let hourLine = 1; hourLine <= 23; hourLine++) {
-        let lineTopdistance = hourLine * 4.166666666666667; // 100% / 24 hours
-        const hourLineBlock = document.createElement("div");
-        hourLineBlock.className = "hour-line-block";
-        hourLineBlock.style.top = `${lineTopdistance}%`;
-
-        eventChartBackground.appendChild(hourLineBlock);
-    }
-    const eventColumnChart = document.createElement("div");
-    eventColumnChart.className = "event-column-chart";
-    // TODO add events rendering to the chart
-    /* 
-    <div class="css-12efcmn" style="top: 9.375%; bottom: 86.4583%; inset-inline: calc(0%);">
-        <div class="event-preview css-g8uo7x"> // grid
-            <button data-focusyn="allow" class="css-1ngsai5 event-button"> //flex
-                <div class="css-z7mtfw"> // flex
-                    <div class="css-dsp1hn">
-                        New Event
-                    </div>
-                    <div class="css-kq1hr5">
-                    </div>
-                </div>
-                <div class="css-1po17j4">
-                </div>
-            </button>
-            <div class="css-444zfp top-resizer">
-            </div>
-            <div class="css-1ix2hec bottom-resizer">
-            </div>
-        </div>
-    </div>
-    */
-    dayEventChart.appendChild(eventChartBackground);
-    dayEventChart.appendChild(eventColumnChart);
-
-    const nowTimeline = document.createElement("div"); // flex
-    nowTimeline.className = "now-timeline";
-    const nowTimelineLabel = document.createElement("div");
-    nowTimelineLabel.className = "now-timeline-label";
-    nowTimelineLabel.innerHTML = "Now"; // TODO add time to the label
-    nowTimelineLabel.className = "now-timeline-label";
-    nowTimeline.appendChild(nowTimelineLabel);
-    // the indicator of real time above event chart
-    const nowTimelineBox = document.createElement("div");
-    nowTimelineBox.className = "now-timeline-box";
-    const nowTimelineLine = document.createElement("div");
-    nowTimelineLine.className = "now-timeline-line";
-    const nowTimelineIndicator = document.createElement("div");
-    nowTimelineIndicator.className = "now-timeline-indicator";
-    nowTimelineBox.appendChild(nowTimelineLine);
-    nowTimelineBox.appendChild(nowTimelineIndicator);    
-    nowTimeline.appendChild(nowTimelineBox);
-
-    let nowTimelineTop = 0; // 0,069444444444444% = 1 minute
-    // nowTimeline.style.top = `${nowTimelineTop}%`;
-
-
-    theScroll.appendChild(dayTimeContainer); 
-    theScroll.appendChild(dayEventChart);
-    theScroll.appendChild(nowTimeline); // TODO add nowTimelineTop to the top of the element
-    scrollContainer.appendChild(theScroll);
-    eventsContainer.appendChild(scrollContainer);
-    body.appendChild(eventsContainer);
-
-    // right side info container
-    const infoContainer = document.createElement("div");
-    infoContainer.className = "info-container";
-
-    const monthContainer = document.createElement("div");
-    monthContainer.className = "month-container-mini";
-    const monthGrid = document.createElement("div"); //grid
-    monthGrid.className = "month-grid";
-    // TODO add month grid rendering
-    monthContainer.appendChild(monthGrid);
-
-    const devider = document.createElement("hr");
-    devider.className = "devider";
-
-    const eventInfo = document.createElement("div");
-    eventInfo.className = "event-info";
-    // TODO add event info rendering
-
-    infoContainer.appendChild(monthContainer);
-    infoContainer.appendChild(devider);
-    infoContainer.appendChild(eventInfo);
-
-    container.appendChild(body);
-    container.appendChild(infoContainer);
-
-    return container;
-}
 
 // Draw calendar
 function drawCalendar(options) {
@@ -362,6 +72,7 @@ function drawCalendar(options) {
         } else if (options.type === "week") {
             calendarHTML = createWeekTable(calendarData);
         } else if (options.type === "day") {
+            calendarData.setSelectedDate = options.setSelectedDate;
             calendarHTML = createDayView(calendarData);
         }
         targetElement.appendChild(calendarHTML);
@@ -404,6 +115,16 @@ function getCalendar(year, month, date, startWeekOnSunday = false) {
     }
 
     return result;
+}
+
+export function UpdateCurrentTime() {
+    const now = new Date();
+    let minutes_offset = parseFloat(now.getHours() * 60 + now.getMinutes());
+    return {
+        hours: now.getHours(),
+        minutes: now.getMinutes(),
+        offset: minutes_offset,
+    };
 }
 
 // Export draw function

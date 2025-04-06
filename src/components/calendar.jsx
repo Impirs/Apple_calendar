@@ -4,7 +4,7 @@ import '../css/calendar_week.css';
 import '../css/calendar_day.css';
 import { draw } from "../js/calendar";
 
-const CalendarGrid = ({ view = 'month', selectedDate }) => {
+const CalendarGrid = ({ view = 'month', selectedDate, setSelectedDate }) => {
   useEffect(() => {
     if (!selectedDate || !selectedDate.date || !selectedDate.month || !selectedDate.year) {
       console.error("Invalid selectedDate:", selectedDate);
@@ -18,6 +18,7 @@ const CalendarGrid = ({ view = 'month', selectedDate }) => {
       month: selectedDate.month,
       year: selectedDate.year,
       startWeekOnSunday: false,
+      setSelectedDate, 
     });
   }, [view, selectedDate]);
 

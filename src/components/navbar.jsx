@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useCalendar } from '../context/CalendarContext';
 import '../css/navbar.css';
 import CalendarGrid from './calendar';
 
 const NavBar = () => {
-  const { selectedDate, setSelectedDate } = useCalendar();
-  const [view, setView] = useState('day');
+  const { selectedDate, setSelectedDate, view, setView } = useCalendar();
 
   const handleViewChange = (newView) => setView(newView);
 
@@ -13,7 +12,7 @@ const NavBar = () => {
     const { date, month, year } = selectedDate;
     const newDate = new Date(year, month, date);
 
-    if (direction === 'today') {
+    if (direction === 'month') {
       const today = new Date();
       setSelectedDate({
         date: today.getDate(),
@@ -82,7 +81,9 @@ const NavBar = () => {
           </div>
         </div>
       </div>
-      <CalendarGrid view={view} selectedDate={selectedDate} />
+      <CalendarGrid view={view} selectedDate={selectedDate} 
+                                setSelectedDate={setSelectedDate} 
+      />
     </div>
   );
 };

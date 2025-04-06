@@ -43,15 +43,39 @@
 
 ### 04.04
 
-- [x] Finish month version of the calendar and make it looks like iCloud as much as possible
+- [x] Finish month version of the calendar and make it looks like iCloud as much as possible, *but only in a popup account container*
 - [x] Plan and design the way of creating week and day versions of calendar
 - [ ] Write new functions in api.js for basic events logic
 - [ ] Test new api logic using Swagger
+
+### 05.04
+
+- [x] Write main structure for day calendar
+- [x] Write basic styles for the day calendar
+- [x] Create the scroll container for event chart
+
+### 06.04
+
+- [x] Restructuring the calendar functions and files for better code orientation
+- [x] Upgrade scroll container part *except handling events*
+- [x] Upgrade context controller to handle date changeing and smooth page refresh without losing selected view and date
+- [x] Write full styles for day calendar *except events objects*
+- [x] Write code for small month calendar grid in day calendar
+
+### 07.04
+
+- [ ] Write the main structure for week calendar
+- [ ] Write basic styles for the week calendar
+
+- [ ] Analyse and plan the event adding pattern *firstly just with the navbar button*
+- [ ] Write all code required for event popup element *firstly just with the navbar button*
 
 ### ToDo later
 
 - [ ] {postponed} Create the first example of adding tasks to the calendar
 - [ ] {postponed} Create the first example of adding and displaying groups, grouping tasks
+- [ ] {postponed} Write new functions in api.js for basic events logic
+- [ ] {postponed} Test new api logic using Swagger
 
 ## Developer Diary
 

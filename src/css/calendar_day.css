@@ -41,7 +41,7 @@
     margin-inline-end: 10px;
 }
 
-/*///////////////////////////////////EVENTS CONTAINER////////////////////////////////////////*/
+/*///////////////////////////////EVENTS CONTAINER///////////////////////////////////*/
 .events-container {
     display: flex;
     flex-direction: column;
@@ -80,14 +80,14 @@
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
-    border-top: 1px solid var(--theme-color-background);
+    border-top: 1px solid var(--theme-color-secondary);
     background-color: transparent;
     height: 100%;
     min-height: 15px;
     border-left: 1px solid var(--theme-color-form);
 }
 
-/*///////////////////////////////////SCROLL CONTAINER////////////////////////////////////////*/
+/*///////////////////////////////SCROLL CONTAINER///////////////////////////////////*/
 .scroll-container {
     flex: 1 1 0%;
     min-height: 0px;
@@ -174,11 +174,13 @@
     background-color: var(--theme-color-form);
 }
 
-/*//////////////////////////////////EVENTS COLUNM CHART//////////////////////////////////////*/
+/*//////////////////////////////EVENTS COLUNM CHART/////////////////////////////////*/
 .event-column-chart {
     position: relative;
     z-index: 2;
 }
+
+/*////////////////////////////////TIME INDICATOR////////////////////////////////////*/
 
 .now-timeline {
     position: absolute;
@@ -190,25 +192,53 @@
 }
 
 .now-timeline-label {
-    position: absolute;
-    left: 10px;
-    font-size: 12px;
-    font-weight: bold;
+    width: 55px;
+    height: 40px;
+    transform: translateY(-50%);
     color: var(--neutral-color-accent);
-    background-color: var(--theme-color-background);
-    padding: 2px 6px;
-    border-radius: 4px;
+    background-image:linear-gradient(180deg, rgba(0, 0, 0, 0) 0%,
+                     var(--theme-color-background) 38%, 
+                     var(--theme-color-background) 62%, 
+                     rgba(0, 0, 0, 0) 100%);
+    font-size: 9px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: end;
+    justify-content: end;
+    padding-right: 5px;
+    position: relative;
+    left: -5px;
 }
 
 .now-timeline-box {
-    position: absolute;
-    left: 60px;
-    right: 0;
-    height: 2px;
-    background-color: var(--neutral-color-accent);
+    position: relative;
+    flex: 1 1 0%;
 }
 
-/*//////////////////////////////////INFO CONTAINER//////////////////////////////////////////*/
+.now-timeline-line {
+    height: 1px;
+    background-color: var(--neutral-color-accent);
+    box-sizing: border-box;
+    position: relative;
+    top: -20px;
+    left: 0px;
+    width: calc(100% + 0px);
+}
+
+.now-timeline-indicator {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--neutral-color-accent);
+    position: absolute;
+    left: calc(0%);
+    top: -19px;
+    transform: translate(calc(-100% + 4px), -50%);
+    border: 1px solid var(--theme-color-background);
+}
+
+/*////////////////////////////////INFO CONTAINER/////////////////////////////////////*/
 .info-container {
     content: '';
     display: flex;
@@ -218,21 +248,70 @@
     color: var(--text-color-main);
 }
 
+/*////////////////////////////////MONTH MINI GRID////////////////////////////////////*/
+
 .month-container-mini {
-    margin-bottom: 10px;
+    padding-block-end: 5px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
 }
 
 .month-grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 2px;
+    grid-template-columns: repeat(7, 27px);
+    grid-template-rows: repeat(6, 20px);
+    gap: 2px 8px;
+    max-width: fit-content;
 }
+.month-grid span {
+    font-size: 10px;
+}
+
+.mini-month-grid-button {
+    border: 0px;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 50%;
+    position: relative;
+    color: var(--text-color-main);
+}
+.mini-month-grid-button:hover {
+    background-color: var(--theme-color-form-active);
+    color: var(--text-color-reverse);   
+}
+.mini-month-grid-button span {
+    font-size: 7px;
+    padding-bottom: 4px;
+}
+
+.weekend {
+    color: var(--theme-color-form-active)
+}
+
+.mini-month-grid-button.today {
+    color: var(--neutral-color-accent);
+}
+.mini-month-grid-button.selected {
+    background-color: var(--neutral-color-accent);
+    color: var(--text-color-reverse);
+}
+
 
 .devider {
     width: 90%;
     border: none;
     border-block-end: 1px solid var(--theme-color-form);
 }
+
+/*///////////////////////////////// EVENT INFO //////////////////////////////////////*/
+
 
 .event-info {
     content: '';
