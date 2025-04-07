@@ -114,6 +114,14 @@ function getCalendar(year, month, date, startWeekOnSunday = false) {
         result.dayOfWeek = (result.dayOfWeek + 6) % 7; // Adjust for Monday start
     }
 
+    // Calculate the start date of the week
+    const selectedDate = new Date(year, month, date);
+    const dayOfWeek = selectedDate.getDay();
+    const adjustedDayOfWeek = startWeekOnSunday ? dayOfWeek : (dayOfWeek + 6) % 7;
+    const startDate = new Date(selectedDate);
+    startDate.setDate(selectedDate.getDate() - adjustedDayOfWeek);
+    result.startDate = startDate;
+
     return result;
 }
 

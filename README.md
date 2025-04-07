@@ -64,11 +64,20 @@
 
 ### 07.04
 
-- [ ] Write the main structure for week calendar
-- [ ] Write basic styles for the week calendar
+- [x] Write the main structure for week calendar
+- [x] Write basic styles for the week calendar
 
-- [ ] Analyse and plan the event adding pattern *firstly just with the navbar button*
+- [x] Write full sctucture for week calendar *except handling events*
+- [x] Write full styles for week calendar *except events objects*
+- [x] Analyse and plan the event adding pattern *firstly just with the navbar button*
 - [ ] Write all code required for event popup element *firstly just with the navbar button*
+
+### 08.04
+
+- [ ] Write new functions in event controller to handle all required operations
+- [ ] Write new api functions to support all required operations
+- [ ] {postponed} Write all code required for event popup element *firstly just with the navbar button*
+- [ ] Write prototype logic for rendering events on month grids
 
 ### ToDo later
 
@@ -117,3 +126,52 @@ On the fourth day of development, having finished with the month version of cale
         </div>
     </div>
 ```
+
+### Week calendar
+
+``` html
+    <div> // flex
+        <div class="week-header">
+            <div class="header-container"> // grid
+                <div class="time-col-offset" />
+                <div class="week-days-container">
+                    <div class="week-days-grid"> // grid
+                        <div> // grid-area: 1 / i / 2 / i+1;
+                            <div class="week-day-lable">
+                                <div class="week-day-date">31</div>
+                                <div class="week-day-name">Mon</div>
+                            </div>
+                        </div>
+                        ....
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="all-day-week-line"> // flex
+            <div class="right-side-barrier"/>
+            <span class="all-day-lable"> All Day </span> //flex
+            <div class="all-day-events-container">
+                <div class="all-day-events-grid"> // grid
+                    <div> // grid-area: 1 / i / 2 / i+1;
+                        // button for events adding
+                    </div>
+                    ....
+                </div>
+            </div>
+        </div> 
+
+        <div class="scroll-container"> // scroll
+            <div class=the-scroll> //flex
+                <div class="day-timline-chart" />
+                <div class="day-event-chart">
+                    <div class="event-chart-background"/>
+                    <div class="event-column-chart" />
+                <div/>
+                <div class="now-timeline" /> 
+            </div>
+        </div>
+    </div>
+```
+
+### Adding events by button

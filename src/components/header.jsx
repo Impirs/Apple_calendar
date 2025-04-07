@@ -1,6 +1,6 @@
 import React from 'react';
 import '../css/header.css';
-import UserForm from './userForm';
+import UserForm from './popup/userForm';
 
 const Header = ({ showPopup }) => {
     const handleAccountClick = () => {

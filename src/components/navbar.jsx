@@ -12,7 +12,7 @@ const NavBar = () => {
     const { date, month, year } = selectedDate;
     const newDate = new Date(year, month, date);
 
-    if (direction === 'month') {
+    if (direction === 'today') {
       const today = new Date();
       setSelectedDate({
         date: today.getDate(),

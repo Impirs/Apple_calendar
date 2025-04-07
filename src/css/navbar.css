@@ -57,13 +57,13 @@
     background-color: var(--theme-color-form-active);
     font-family: "Roboto classic";
 }
-button:not(:last-child)::after {
+.view_buttons button:not(:last-child)::after {
     content: '';
     position: absolute;
     right: 0;
     top: 2px;
     bottom: 2px;
-    width: 0.5px;
+    width: 0.7px;
     background-color: var(--theme-color-form-hover);
 }
 

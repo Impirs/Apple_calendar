@@ -1,14 +1,149 @@
 .calendar-week-view {
+    flex: 1 1 0%;
+    min-height: 0px;
+    outline: none;
+}
+
+.week-body {
+    height: 100%;
+    padding-inline-start: 21px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
 }
 
-.calendar-week-view .day-column {
-    flex: 1;
+/*///////////////////////////////HEADER CONTAINER///////////////////////////////////*/
+
+.week-header {
+    margin-inline-end: 10px;
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: 60px auto;
+    grid-template-rows: 1fr;
+    gap: 0px;
+}
+
+.time-col-offset {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+.week-days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 14.2857%);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 0px;
+}
+
+.week-day-label {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-block-end: 4px;
+}
+
+.week-day-date {
+    color: var(--text-color-main);
+    font-family: "Roboto bold" ;
+    height: 20px;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 10px;
+}
+
+.week-day-name {
+    font-size: 11px;
+    width: 20px;
+    margin-inline-start: 3px;
+    margin-bottom: 1px;
+    color: var(--text-color-secondary);
+}
+
+/*///////////////////////////////ALL DAY EVENTS///////////////////////////////////*/
+
+.all-day-week-line {
+    flex-shrink: 0;
+    display: flex;
+    border-bottom: 2px solid var(--theme-color-form);
+    position: relative;
+    padding-inline-end: 10px;
+}
+
+.all-days-events-container {
+    flex: 1 1 0%;
+    max-height: 90px;
+    overflow-y: auto;
+    border-top: 1px solid var(--theme-color-form);
+}
+
+.right-side-barrier {
+    width: 0.5px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 9.5px;
+    background-color: var(--theme-color-form);
+}
+
+.all-day-lable {
+    height: 15px;
+    width: 60px;
+    right: 10px;
+    overflow: hidden;
+    font-size: 10px;
+    color: rgb(102, 102, 102);
+    text-align: right;
+    position: relative;
+    display: flex;
+    -webkit-box-pack: end;
+    place-content: center end;
+    flex-wrap: wrap;
+}
+
+.all-day-events-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 0px;
+}
+
+.all-day-day-button {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-top: 1px solid var(--theme-color-background);
     background-color: transparent;
+    height: 100%;
+    min-height: 15px;
+    border-left: 1px solid var(--theme-color-form);
 }
 
-.calendar-week-view .weekend-column {
-    background-color: var(--theme-color-secondary);
+/*//////////////////////////////EVENTS COLUNM CHART/////////////////////////////////*/
+
+.week-event-chart {
+    position: absolute;
+    top: 0;
+    left: 60px;
+    right: 0;
+    height: 100%;
+}
+
+.event-columns {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.event-column {
+    flex: 1 1 0%;
+    border-left: 1px solid var(--theme-color-form);
+}
+
+.weekend {
+    background: var(--theme-color-secondary);
 }

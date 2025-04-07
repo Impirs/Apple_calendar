@@ -135,7 +135,7 @@ function createAllDayHeader() {
     return eventsHeader;
 }
 
-function createDayTimeChart() {
+export function createDayTimeChart() {
     const dayTimelineChart = document.createElement("div"); // grid
     // grid-template-columns: 90px repeat(1, calc(100% - 90px));
     // grid-template-rows: repeat(1440, 1fr);
@@ -165,7 +165,7 @@ function createDayTimeChart() {
     return dayTimelineChart;
 }
 
-function createRTindicator() {
+export function createRTindicator() {
     let currentTime = UpdateCurrentTime();
 
     const nowTimeline = document.createElement("div"); // flex
