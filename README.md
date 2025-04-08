@@ -4,9 +4,24 @@
 
 ## ReadMe stucture
 
-1. [Installation and testing](#installation-and-testing)
-2. [Project plans](#project-plans)
-3. [Programmer Diary](#developer-diary)
+1. [Project preview](#project-preview)
+2. [Installation and testing](#installation-and-testing)
+3. [Project plans](#project-plans)
+4. [Programmer Diary](#developer-diary)
+
+## Project preview
+
+> Since the user will need to configure many things to run the project on another computer, I decided to add this section and show the work done in it upon completion of the next section of the path. After assembling the project, I think it will be possible to download it and fully test it, but now it is difficult to implement.
+
+The first thing I would like to show is the completed options for displaying the calendar in the form of a month, week and day.
+
+![calendar_page_month_view](preview/month_calendar.png)
+![calendar_page_day_view](preview/day_calendar.png)
+![calendar_page_week_view](preview/week_calendar.png)
+
+Also, at the moment, one type of interaction is already available - creating, logging in and logging out of an account.
+
+![iteraction_user_login](preview/user_popup.gif)
 
 ## Installation and testing
 
@@ -74,9 +89,9 @@
 
 ### 08.04
 
-- [ ] Write new functions in event controller to handle all required operations
-- [ ] Write new api functions to support all required operations
-- [ ] {postponed} Write all code required for event popup element *firstly just with the navbar button*
+- [x] Write new functions in event controller to handle all required operations
+- [x] Write new api functions to support all required operations
+- [x] {postponed} Write all code required for event popup element *firstly just with the navbar button*
 - [ ] Write prototype logic for rendering events on month grids
 
 ### ToDo later

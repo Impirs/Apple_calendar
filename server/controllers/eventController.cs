@@ -5,7 +5,7 @@ using EventManagementAPI.Models;
 using RecurRulesAPI.Models;
 
 
-namespace UserManagementAPI.Controllers
+namespace EventManagementAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -18,6 +18,53 @@ namespace UserManagementAPI.Controllers
             _context = context;
         }
 
+        [HttpPost("create-event")]
+        public async Task<IActionResult> CreateEvent([FromBody] Event newEvent)
+        {
+            if (newEvent == null) return BadRequest("Некорректные данные события");
+
+            await _context.events.AddAsync(newEvent);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Событие создано", eventId = newEvent.Id });
+        }
+
+        [HttpGet("get-events-by-date")]
+        public async Task<IActionResult> GetEventsByDate([FromQuery] DateTime date)
+        {
+            var events = await _context.events
+                .Where(e => e.StartTime.Date == date.Date)
+                .ToListAsync();
+
+            if (!events.Any()) return NotFound("События на указанную дату не найдены");
+
+            return Ok(events);
+        }
+
+        [HttpGet("get-events-by-owner/{ownerId}")]
+        public async Task<IActionResult> GetEventsByOwner(int ownerId)
+        {
+            var events = await _context.events
+                .Where(e => e.UserId == ownerId)
+                .ToListAsync();
+
+            if (!events.Any()) return NotFound("События для указанного владельца не найдены");
+
+            return Ok(events);
+        }
+
+        [HttpGet("get-events-by-group/{groupId}")]
+        public async Task<IActionResult> GetEventsByGroup(int groupId)
+        {
+            var events = await _context.events
+                .Where(e => e.GroupId == groupId)
+                .ToListAsync();
+
+            if (!events.Any()) return NotFound("События для указанной группы не найдены");
+
+            return Ok(events);
+        }
+
         [HttpPut("update-event/{eventId}")]
         public async Task<IActionResult> UpdateEvent(int eventId, [FromBody] Event updatedEvent)
         {
@@ -27,6 +74,8 @@ namespace UserManagementAPI.Controllers
             existingEvent.Title = updatedEvent.Title;
             existingEvent.StartTime = updatedEvent.StartTime;
             existingEvent.EndTime = updatedEvent.EndTime;
+            existingEvent.GroupId = updatedEvent.GroupId;
+            existingEvent.UserId = updatedEvent.UserId;
 
             await _context.SaveChangesAsync();
 
@@ -60,7 +109,7 @@ namespace UserManagementAPI.Controllers
             _context.events.Remove(eventToDelete);
             await _context.SaveChangesAsync();
 
-            return Ok(new { message = "Событие удалено" });
+            return Ok(new { message = "Событие удалено", eventId });
         }
     }
 }

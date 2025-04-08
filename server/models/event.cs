@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic; // For List<T>
 using UserManagementAPI.Models;
 using GroupManagementAPI.Models;
 using RecurRulesAPI.Models;
@@ -56,7 +55,7 @@ namespace EventManagementAPI.Models {
         public bool Alert { get; set; }
 
         // Invitees
-        [Column("invitees")]
+        [NotMapped]
         public List<User>? Invitees { get; set; }
 
         // URL
