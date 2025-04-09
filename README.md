@@ -94,6 +94,8 @@ Also, at the moment, one type of interaction is already available - creating, lo
 - [x] {postponed} Write all code required for event popup element *firstly just with the navbar button*
 - [ ] Write prototype logic for rendering events on month grids
 
+### 09 and 10 of april are rest days, working on "Развивашка" update. 
+
 ### ToDo later
 
 - [ ] {postponed} Create the first example of adding tasks to the calendar
